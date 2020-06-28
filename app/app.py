@@ -21,5 +21,9 @@ def index():
             image_path = os.path.join("app/static", uploaded_file.filename)
             uploaded_file.save(image_path)
             class_name = inference.get_prediction(image_path)
-            print("CLASS NAME = ", class_name)
+            result = {
+                "class_name": class_name,
+                "image_path": image_path[4:]
+            }
+            return render_template("show.html", result=result)
     return render_template("index.html")
